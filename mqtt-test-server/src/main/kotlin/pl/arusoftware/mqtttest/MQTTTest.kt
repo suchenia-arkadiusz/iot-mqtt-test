@@ -7,5 +7,8 @@ fun main() {
     mqttConnection.subscribeTopic("adevice/+/data") { topic, message ->
         println("$topic = ${String(message.payload)}")
     }
-    println("In main function")
+    while (true) {
+        mqttConnection.publishMessage("adevice/NMCU_1589714856299/settings", "test message")
+        Thread.sleep(1000)
+    }
 }
