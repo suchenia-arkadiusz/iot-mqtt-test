@@ -28,6 +28,7 @@ class Connection private constructor(val publisherId: String, val uri: String, p
 
     fun publishMessage(topic: String, message: String) {
         val mqttMessage = MqttMessage(message.toByteArray())
+        println("Publish message: $message")
         mqttClient.publish(topic, mqttMessage)
     }
 
