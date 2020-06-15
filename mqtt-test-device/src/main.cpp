@@ -37,14 +37,14 @@ void generateJson() {
   serializeJson(object, json);
 }
 
-void readDataAndsendMessage() {
+void readDataAndSendMessage() {
   readData();
   generateJson();
   Serial.println("Publish message: " + json);
   client.publish(publishTopic.c_str(), json.c_str());
 }
 
-void reveiveMessage(String &topic, String &message) {
+void receiveMessage(String &topic, String &message) {
   Serial.println("Incoming:" + topic + " - " + message);
 }
 
@@ -86,10 +86,10 @@ void setup() {
   delay(100);
 
   client.begin("192.168.8.185", 1883, net);
-  client.onMessage(reveiveMessage);
+  client.onMessage(receiveMessage);
   connectWithMQTT();
   
-  ticker.attach_ms(10000, readDataAndsendMessage);
+  ticker.attach_ms(10000, readDataAndSendMessage);
 }
 
 void loop() {
